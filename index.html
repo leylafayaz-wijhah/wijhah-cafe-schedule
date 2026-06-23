@@ -10,7 +10,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .header{background:var(--scarlet);color:white;padding:24px 24px 0;text-align:center;}
 .header-eyebrow{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.65;margin-bottom:6px;}
 .header h1{font-size:26px;font-weight:800;letter-spacing:-.5px;margin-bottom:16px;}
-.month-tabs{display:flex;gap:4px;justify-content:center;padding-bottom:0;}
+.month-tabs{display:flex;gap:4px;justify-content:center;}
 .month-tab{flex:1;max-width:180px;padding:8px 12px;border:none;border-radius:8px 8px 0 0;font-size:13px;font-weight:700;cursor:pointer;background:rgba(255,255,255,.18);color:rgba(255,255,255,.7);font-family:inherit;transition:all .15s;}
 .month-tab.active{background:var(--offwhite);color:var(--scarlet);}
 .filter-section{background:white;border-bottom:1px solid var(--border);padding:14px 20px;position:sticky;top:0;z-index:10;box-shadow:0 2px 8px rgba(0,0,0,.04);}
@@ -86,116 +86,25 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </button>
 </div>
 <script>
-const MONTHS=[{"monthName":"June","year":2026,"schedule":[{"date":"2026-06-03","day":"Wednesday","time":"7:30 PM – 10:00 PM","active":["Habiba Hashi","Maryam Ahmed","Maryam Ullah"],"backup":["Mubasshira"],"lead":"Habiba Hashi","runner":"Abdullah S."},{"date":"2026-06-05","day":"Friday","time":"7:00 PM – 10:00 PM","active":["Mubasshira","Minelle Zuberi","Habiba Hashi","Tooba Shaikh","Maryam Ullah"],"backup":["Maryam Ahmed"],"lead":"Mubasshira","runner":"Taha Butta"},{"date":"2026-06-07","day":"Sunday","time":"10:30 AM – 1:00 PM","active":["Mubasshira","Maryam Ahmed","Tooba Shaikh"],"backup":["Minelle Zuberi","Maryam Ullah"],"lead":"Maryam Ahmed","runner":"Abdullah S."},{"date":"2026-06-10","day":"Wednesday","time":"7:30 PM – 10:00 PM","active":["Maryam Ullah","Minelle Zuberi","Tooba Shaikh"],"backup":["Maryam Ahmed"],"lead":"Maryam Ullah","runner":"Umar"},{"date":"2026-06-12","day":"Friday","time":"7:00 PM – 10:00 PM","active":["Mubasshira","Habiba Hashi","Maryam Ullah","Tooba Shaikh","Minelle Zuberi"],"backup":["Maryam Ahmed"],"lead":"Tooba Shaikh","runner":"Taha Butta"},{"date":"2026-06-14","day":"Sunday","time":"10:30 AM – 1:00 PM","active":["Maryam Ullah","Tooba Shaikh","Maryam Ahmed"],"backup":["Mubasshira","Minelle Zuberi"],"lead":"Maryam Ullah","runner":"Abdullah S."},{"date":"2026-06-17","day":"Wednesday","time":"7:30 PM – 10:00 PM","active":["Mubasshira","Tooba Shaikh","Habiba Hashi"],"backup":["Maryam Ahmed"],"lead":"Mubasshira","runner":"Umar"},{"date":"2026-06-19","day":"Friday","time":"7:00 PM – 10:00 PM","active":["Maryam Ahmed","Tooba Shaikh","Mubasshira","Maryam Ullah","Habiba Hashi"],"backup":["Minelle Zuberi"],"lead":"Maryam Ahmed","runner":"Taha Butta"},{"date":"2026-06-21","day":"Sunday","time":"10:30 AM – 1:00 PM","active":["Tooba Shaikh","Minelle Zuberi","Maryam Ullah"],"backup":["Maryam Ahmed","Mubasshira"],"lead":"Minelle Zuberi","runner":"Abdullah S."},{"date":"2026-06-24","day":"Wednesday","time":"7:30 PM – 10:00 PM","active":["Maryam Ahmed","Mubasshira","Habiba Hashi"],"backup":["Minelle Zuberi"],"lead":"Habiba Hashi","runner":"Umar"},{"date":"2026-06-26","day":"Friday","time":"7:00 PM – 10:00 PM","active":["Minelle Zuberi","Maryam Ullah","Habiba Hashi","Maryam Ahmed","Mubasshira"],"backup":["Tooba Shaikh"],"lead":"Minelle Zuberi","runner":"Taha Butta"},{"date":"2026-06-28","day":"Sunday","time":"10:30 AM – 1:00 PM","active":["Tooba Shaikh","Minelle Zuberi","Maryam Ahmed"],"backup":["Mubasshira","Maryam Ullah"],"lead":"Tooba Shaikh","runner":"Abdullah S."}]},{"monthName":"July","year":2026,"schedule":[{"date":"2026-07-01","day":"Wednesday","time":"7:30 PM – 10:00 PM","active":["Minelle Zuberi","Maryam Ullah","Habiba Hashi"],"backup":["Mubasshira"],"lead":"Minelle Zuberi","runner":"Abdullah S."},{"date":"2026-07-03","day":"Friday","time":"7:00 PM – 10:00 PM","active":["Maryam Ahmed","Minelle Zuberi","Mubasshira","Tooba Shaikh","Maryam Ullah"],"backup":["Habiba Hashi"],"lead":"Maryam Ahmed","runner":"Taha Butta"},{"date":"2026-07-05","day":"Sunday","time":"10:30 AM – 1:00 PM","active":["Maryam Ahmed","Mubasshira","Tooba Shaikh"],"backup":["Maryam Ullah","Minelle Zuberi"],"lead":"Mubasshira","runner":"Abdullah S."},{"date":"2026-07-08","day":"Wednesday","time":"7:30 PM – 10:00 PM","active":["Tooba Shaikh","Habiba Hashi","Maryam Ahmed"],"backup":["Maryam Ullah"],"lead":"Tooba Shaikh","runner":"Umar"},{"date":"2026-07-10","day":"Friday","time":"7:00 PM – 10:00 PM","active":["Tooba Shaikh","Habiba Hashi","Maryam Ahmed","Mubasshira","Maryam Ullah"],"backup":["Minelle Zuberi"],"lead":"Habiba Hashi","runner":"Taha Butta"},{"date":"2026-07-12","day":"Sunday","time":"10:30 AM – 1:00 PM","active":["Mubasshira","Maryam Ullah","Minelle Zuberi"],"backup":["Tooba Shaikh","Maryam Ahmed"],"lead":"Maryam Ullah","runner":"Abdullah S."},{"date":"2026-07-15","day":"Wednesday","time":"7:30 PM – 10:00 PM","active":["Maryam Ahmed","Mubasshira","Habiba Hashi"],"backup":["Minelle Zuberi"],"lead":"Maryam Ahmed","runner":"Umar"},{"date":"2026-07-17","day":"Friday","time":"7:00 PM – 10:00 PM","active":["Minelle Zuberi","Tooba Shaikh","Maryam Ahmed","Habiba Hashi","Maryam Ullah"],"backup":["Mubasshira"],"lead":"Minelle Zuberi","runner":"Taha Butta"},{"date":"2026-07-19","day":"Sunday","time":"10:30 AM – 1:00 PM","active":["Minelle Zuberi","Maryam Ahmed","Mubasshira"],"backup":["Maryam Ullah","Tooba Shaikh"],"lead":"Mubasshira","runner":"Abdullah S."},{"date":"2026-07-22","day":"Wednesday","time":"7:30 PM – 10:00 PM","active":["Tooba Shaikh","Maryam Ullah","Habiba Hashi"],"backup":["Minelle Zuberi"],"lead":"Tooba Shaikh","runner":"Umar"},{"date":"2026-07-24","day":"Friday","time":"7:00 PM – 10:00 PM","active":["Maryam Ullah","Maryam Ahmed","Minelle Zuberi","Habiba Hashi","Mubasshira"],"backup":["Tooba Shaikh"],"lead":"Maryam Ullah","runner":"Taha Butta"},{"date":"2026-07-26","day":"Sunday","time":"10:30 AM – 1:00 PM","active":["Maryam Ahmed","Mubasshira","Maryam Ullah"],"backup":["Minelle Zuberi","Tooba Shaikh"],"lead":"Maryam Ahmed","runner":"Abdullah S."},{"date":"2026-07-29","day":"Wednesday","time":"7:30 PM – 10:00 PM","active":["Habiba Hashi","Tooba Shaikh","Minelle Zuberi"],"backup":["Maryam Ullah"],"lead":"Habiba Hashi","runner":"Umar"},{"date":"2026-07-31","day":"Friday","time":"7:00 PM – 10:00 PM","active":["Maryam Ullah","Maryam Ahmed","Tooba Shaikh","Minelle Zuberi","Mubasshira"],"backup":["Habiba Hashi"],"lead":"Maryam Ullah","runner":"Taha Butta"}]}];
+const MONTHS=[{"monthName":"June","year":2026,"schedule":[{"date":"2026-06-07","day":"Sunday","time":"10:30 AM – 1:00 PM","active":["Maryam Ullah","Habiba Hashi","Maryam Ahmed"],"backup":["Mubasshira","Umar"],"lead":"Maryam Ullah","runner":null},{"date":"2026-06-10","day":"Wednesday","time":"7:30 PM – 10:00 PM","active":["Minelle Zuberi","Maryam Ullah","Maryam Ahmed"],"backup":["Mubasshira"],"lead":"Minelle Zuberi","runner":null},{"date":"2026-06-12","day":"Friday","time":"7:00 PM – 10:00 PM","active":["Habiba Hashi","Umar","Abdullah S.","Taha Butta","Minelle Zuberi"],"backup":["Tooba Shaikh","Maryam Ullah","Mubasshira"],"lead":"Habiba Hashi","runner":null},{"date":"2026-06-14","day":"Sunday","time":"10:30 AM – 1:00 PM","active":["Habiba Hashi","Umar","Maryam Ullah"],"backup":["Mubasshira","Maryam Ahmed"],"lead":"Habiba Hashi","runner":null},{"date":"2026-06-17","day":"Wednesday","time":"7:30 PM – 10:00 PM","active":["Maryam Ahmed","Minelle Zuberi","Maryam Ullah"],"backup":["Mubasshira"],"lead":"Maryam Ahmed","runner":null},{"date":"2026-06-19","day":"Friday","time":"7:00 PM – 10:00 PM","active":["Tooba Shaikh","Maryam Ullah","Minelle Zuberi","Habiba Hashi","Umar"],"backup":["Taha Butta","Mubasshira","Abdullah S."],"lead":"Tooba Shaikh","runner":null},{"date":"2026-06-21","day":"Sunday","time":"10:30 AM – 1:00 PM","active":["Mubasshira","Maryam Ahmed","Habiba Hashi"],"backup":["Maryam Ullah","Umar"],"lead":"Mubasshira","runner":null},{"date":"2026-06-24","day":"Wednesday","time":"7:30 PM – 10:00 PM","active":["Mubasshira","Maryam Ahmed","Minelle Zuberi"],"backup":["Maryam Ullah"],"lead":"Mubasshira","runner":null},{"date":"2026-06-26","day":"Friday","time":"7:00 PM – 10:00 PM","active":["Abdullah S.","Taha Butta","Minelle Zuberi","Tooba Shaikh","Maryam Ullah"],"backup":["Mubasshira","Habiba Hashi","Umar"],"lead":"Abdullah S.","runner":null},{"date":"2026-06-28","day":"Sunday","time":"10:30 AM – 1:00 PM","active":["Umar","Maryam Ullah","Mubasshira"],"backup":["Maryam Ahmed","Habiba Hashi"],"lead":"Umar","runner":null}]},{"monthName":"July","year":2026,"schedule":[{"date":"2026-07-01","day":"Wednesday","time":"7:30 PM – 10:00 PM","active":["Maryam Ahmed","Maryam Ullah","Mubasshira"],"backup":["Habiba Hashi"],"lead":"Maryam Ahmed","runner":"Abdullah S."},{"date":"2026-07-03","day":"Friday","time":"7:00 PM – 10:00 PM","active":["Tooba Shaikh","Minelle Zuberi","Habiba Hashi","Maryam Ullah","Mubasshira"],"backup":["Maryam Ahmed"],"lead":"Tooba Shaikh","runner":"Taha Butta"},{"date":"2026-07-05","day":"Sunday","time":"10:30 AM – 1:00 PM","active":["Maryam Ahmed","Minelle Zuberi","Mubasshira"],"backup":["Maryam Ullah","Tooba Shaikh"],"lead":"Minelle Zuberi","runner":"Abdullah S."},{"date":"2026-07-08","day":"Wednesday","time":"7:30 PM – 10:00 PM","active":["Minelle Zuberi","Maryam Ahmed","Habiba Hashi"],"backup":["Maryam Ullah"],"lead":"Habiba Hashi","runner":"Umar"},{"date":"2026-07-10","day":"Friday","time":"7:00 PM – 10:00 PM","active":["Mubasshira","Maryam Ullah","Maryam Ahmed","Habiba Hashi","Minelle Zuberi"],"backup":["Tooba Shaikh"],"lead":"Mubasshira","runner":"Taha Butta"},{"date":"2026-07-12","day":"Sunday","time":"10:30 AM – 1:00 PM","active":["Mubasshira","Maryam Ahmed","Maryam Ullah"],"backup":["Tooba Shaikh","Minelle Zuberi"],"lead":"Maryam Ullah","runner":"Abdullah S."},{"date":"2026-07-15","day":"Wednesday","time":"7:30 PM – 10:00 PM","active":["Maryam Ullah","Tooba Shaikh","Mubasshira"],"backup":["Minelle Zuberi"],"lead":"Maryam Ullah","runner":"Umar"},{"date":"2026-07-17","day":"Friday","time":"7:00 PM – 10:00 PM","active":["Maryam Ahmed","Maryam Ullah","Minelle Zuberi","Habiba Hashi","Mubasshira"],"backup":["Tooba Shaikh"],"lead":"Maryam Ahmed","runner":"Taha Butta"},{"date":"2026-07-19","day":"Sunday","time":"10:30 AM – 1:00 PM","active":["Mubasshira","Maryam Ahmed","Tooba Shaikh"],"backup":["Maryam Ullah","Minelle Zuberi"],"lead":"Mubasshira","runner":"Abdullah S."},{"date":"2026-07-22","day":"Wednesday","time":"7:30 PM – 10:00 PM","active":["Maryam Ullah","Habiba Hashi","Maryam Ahmed"],"backup":["Mubasshira"],"lead":"Habiba Hashi","runner":"Umar"},{"date":"2026-07-24","day":"Friday","time":"7:00 PM – 10:00 PM","active":["Maryam Ahmed","Mubasshira","Minelle Zuberi","Maryam Ullah","Habiba Hashi"],"backup":["Tooba Shaikh"],"lead":"Minelle Zuberi","runner":"Taha Butta"},{"date":"2026-07-26","day":"Sunday","time":"10:30 AM – 1:00 PM","active":["Minelle Zuberi","Maryam Ullah","Mubasshira"],"backup":["Maryam Ahmed","Tooba Shaikh"],"lead":"Minelle Zuberi","runner":"Abdullah S."},{"date":"2026-07-29","day":"Wednesday","time":"7:30 PM – 10:00 PM","active":["Maryam Ullah","Maryam Ahmed","Minelle Zuberi"],"backup":["Habiba Hashi"],"lead":"Maryam Ullah","runner":"Umar"},{"date":"2026-07-31","day":"Friday","time":"7:00 PM – 10:00 PM","active":["Maryam Ahmed","Minelle Zuberi","Habiba Hashi","Maryam Ullah","Mubasshira"],"backup":["Tooba Shaikh"],"lead":"Maryam Ahmed","runner":"Taha Butta"}]}];
 const BARISTAS=["Abdullah S.","Habiba Hashi","Maryam Ahmed","Maryam Ullah","Minelle Zuberi","Mubasshira","Taha Butta","Tooba Shaikh","Umar"];
-let mi=0,activeFilter=null;
+let mi=0,af=null;
 function cur(){return MONTHS[mi].schedule;}
-function setMonth(idx,el){
-  mi=idx;
-  document.querySelectorAll('.month-tab').forEach(t=>t.classList.remove('active'));
-  el.classList.add('active');
-  renderShifts();renderSpotlight();updateCalBar();
-}
-function buildPills(){
-  const c=document.getElementById('name-pills');
-  BARISTAS.forEach(name=>{const p=document.createElement('div');p.className='name-pill';p.textContent=name;p.onclick=()=>setFilter(name,p);c.appendChild(p);});
-}
-function setFilter(name,el){
-  activeFilter=name;
-  document.querySelectorAll('.name-pill').forEach(p=>p.classList.remove('active'));
-  el.classList.add('active');
-  renderShifts();renderSpotlight();updateCalBar();
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-function onShift(s,name){
-  if(!name)return true;
-  return s.active.includes(name)||s.backup.includes(name)||s.runner===name;
-}
-function myShiftsInMonth(schedule){
-  if(!activeFilter)return[];
-  return schedule.filter(s=>onShift(s,activeFilter));
-}
-function myAllShifts(){
-  if(!activeFilter)return[];
-  const all=[];
-  MONTHS.forEach(m=>m.schedule.forEach(s=>{if(onShift(s,activeFilter))all.push(s);}));
-  return all;
-}
-function updateCalBar(){
-  const bar=document.getElementById('cal-bar'),label=document.getElementById('cal-bar-label'),count=document.getElementById('cal-bar-count');
-  const all=myAllShifts();
-  if(!activeFilter||!all.length){bar.classList.remove('visible');return;}
-  label.textContent=activeFilter+' · '+all.length+' shift'+(all.length!==1?'s':'')+' total';
-  count.textContent=all.length;bar.classList.add('visible');
-}
-function exportShifts(){
-  const all=myAllShifts();if(!all.length)return;
-  const evts=all.map(s=>{
-    const[start,end]=parseTime(s.date,s.time);
-    const role=s.lead===activeFilter?'Lead':s.runner===activeFilter?'Runner':s.active.includes(activeFilter)?'On shift':'Backup';
-    const now=new Date().toISOString().replace(/[:-.]/g,'').slice(0,15)+'Z';
-    return['BEGIN:VEVENT','UID:'+s.date+'-'+activeFilter.replace(/\s/g,'')+'@wijhah.org','DTSTAMP:'+now,'DTSTART:'+start,'DTEND:'+end,'SUMMARY:Wijhah Café – '+role,'LOCATION:Wijhah','END:VEVENT'].join('\r\n');
-  }).join('\r\n');
-  const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Wijhah Café//EN','CALSCALE:GREGORIAN','METHOD:PUBLISH',evts,'END:VCALENDAR'].join('\r\n');
-  const a=document.createElement('a');
-  a.href=URL.createObjectURL(new Blob([ics],{type:'text/calendar;charset=utf-8'}));
-  a.download='wijhah-cafe-'+activeFilter.toLowerCase().replace(/\s/g,'-')+'.ics';
-  a.click();
-}
-function parseTime(date,time){
-  const pts=time.replace('–','-').split('-').map(s=>s.trim());
-  function toISO(t,b){const m=t.match(/(\d+):(\d+)\s*(AM|PM)/i);if(!m)return null;let h=parseInt(m[1]),min=parseInt(m[2]);if(m[3].toUpperCase()==='PM'&&h!==12)h+=12;if(m[3].toUpperCase()==='AM'&&h===12)h=0;return b.replace(/-/g,'')+'T'+String(h).padStart(2,'0')+String(min).padStart(2,'0')+'00';}
-  return[toISO(pts[0],date),toISO(pts[1],date)];
-}
-function renderSpotlight(){
-  const box=document.getElementById('spotlight');
-  if(!activeFilter){box.classList.remove('visible');return;}
-  const today=dstr(new Date());let next=null;
-  for(const m of MONTHS){for(const s of m.schedule){if(s.date>=today&&onShift(s,activeFilter)){if(!next||s.date<next.date){next=s;break;}}}}
-  if(!next){box.classList.remove('visible');return;}
-  const isLead=next.lead===activeFilter,isRunner=next.runner===activeFilter,isActive=next.active.includes(activeFilter),isToday=next.date===today;
-  const role=isLead?'Lead':isRunner?'Runner':isActive?'On shift':'Backup';
-  const rc=isLead?'lead':isRunner?'runner':isActive?'active':'backup';
-  const d=new Date(next.date+'T12:00:00');
-  const lbl=d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
-  const others=next.active.filter(n=>n!==activeFilter);
-  box.className='spotlight visible';
-  box.innerHTML='<div class="spotlight-eyebrow">'+(isToday?"Today's shift":"Coming up next")+'</div><div class="spotlight-title">'+lbl+'</div><div class="spotlight-time">'+next.time+'</div><span class="spotlight-role '+rc+'">'+role+'</span><div class="spotlight-team">Also on shift: '+(others.length?others.join(', '):'—')+'</div>';
-}
-function renderShifts(){
-  const wrap=document.getElementById('shifts-wrap'),today=dstr(new Date());
-  const toShow=activeFilter?cur().filter(s=>onShift(s,activeFilter)):cur();
-  if(!toShow.length){wrap.innerHTML='<div class="empty">☕<br>No shifts this month.</div>';return;}
-  wrap.innerHTML='';
-  toShow.forEach(s=>{
-    const d=new Date(s.date+'T12:00:00');
-    const isToday=s.date===today;
-    const isLead=activeFilter&&s.lead===activeFilter;
-    const isRunner=activeFilter&&s.runner===activeFilter;
-    const card=document.createElement('div');
-    let cardCls='shift-card highlighted';
-    if(isLead)cardCls+=' is-lead';
-    else if(isRunner)cardCls+=' is-runner';
-    card.className=cardCls;
-    let badges='';
-    s.active.forEach(name=>{
-      const lead=name===s.lead,self=name===activeFilter;
-      let cls='barista-badge';
-      if(self&&lead)cls+=' b-self b-lead';
-      else if(self)cls+=' b-self';
-      else if(lead)cls+=' b-lead';
-      else cls+=' b-active';
-      badges+='<span class="'+cls+'">'+name+(lead?' ☕':'')+'</span>';
-    });
-    const runnerHTML=s.runner?('<div class="runner-row"><strong>Runner:</strong><span class="runner-badge'+(s.runner===activeFilter?' b-self':'')+'">'+s.runner+'</span></div>'):'';
-    const bkHTML=s.backup.length?('<div class="backup-row"><strong>Backup:</strong> '+s.backup.join(', ')+'</div>'):'';
-    const dayNum=d.getDate();const monthStr=d.toLocaleDateString('en-US',{month:'short'});
-    card.innerHTML='<div class="card-header"><div class="card-date-group"><div class="card-day">'+s.day.slice(0,3)+'</div><div class="card-date">'+dayNum+'</div><div class="card-month">'+monthStr+(isToday?'<span class="today-badge">Today</span>':'')+'</div></div><div class="card-time">'+s.time+'</div></div><div class="card-body"><div class="barista-row">'+badges+'</div>'+runnerHTML+bkHTML+'</div>';
-    wrap.appendChild(card);
-  });
-}
-function dstr(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
-buildPills();renderShifts();
+function setMonth(idx,el){mi=idx;document.querySelectorAll('.month-tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');render();renderSpotlight();updateCalBar();}
+function buildPills(){const c=document.getElementById('name-pills');BARISTAS.forEach(name=>{const p=document.createElement('div');p.className='name-pill';p.textContent=name;p.onclick=()=>setFilter(name,p);c.appendChild(p);});}
+function setFilter(name,el){af=name;document.querySelectorAll('.name-pill').forEach(p=>p.classList.remove('active'));el.classList.add('active');render();renderSpotlight();updateCalBar();window.scrollTo({top:0,behavior:'smooth'});}
+function onShift(s,n){if(!n)return true;return s.active.includes(n)||s.backup.includes(n)||s.runner===n;}
+function allMyShifts(){if(!af)return[];const a=[];MONTHS.forEach(m=>m.schedule.forEach(s=>{if(onShift(s,af))a.push(s);}));return a;}
+function updateCalBar(){const bar=document.getElementById('cal-bar'),lbl=document.getElementById('cal-bar-label'),cnt=document.getElementById('cal-bar-count');const a=allMyShifts();if(!af||!a.length){bar.classList.remove('visible');return;}lbl.textContent=af+' · '+a.length+' shift'+(a.length!==1?'s':'')+' total';cnt.textContent=a.length;bar.classList.add('visible');}
+function exportShifts(){const a=allMyShifts();if(!a.length)return;const evts=a.map(s=>{const[st,en]=pt(s.date,s.time);const role=s.lead===af?'Lead':s.runner===af?'Runner':s.active.includes(af)?'On shift':'Backup';const now=new Date().toISOString().replace(/[:-.]/g,'').slice(0,15)+'Z';return['BEGIN:VEVENT','UID:'+s.date+'-'+af.replace(/s/g,'')+'@wijhah.org','DTSTAMP:'+now,'DTSTART:'+st,'DTEND:'+en,'SUMMARY:Wijhah Café – '+role,'LOCATION:Wijhah','END:VEVENT'].join('
+');}).join('
+');const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Wijhah Café//EN','CALSCALE:GREGORIAN','METHOD:PUBLISH',evts,'END:VCALENDAR'].join('
+');const a2=document.createElement('a');a2.href=URL.createObjectURL(new Blob([ics],{type:'text/calendar;charset=utf-8'}));a2.download='wijhah-cafe-'+af.toLowerCase().replace(/s/g,'-')+'.ics';a2.click();}
+function pt(date,time){const p=time.replace('–','-').split('-').map(s=>s.trim());function iso(t,b){const m=t.match(/(d+):(d+)s*(AM|PM)/i);if(!m)return null;let h=parseInt(m[1]),mn=parseInt(m[2]);if(m[3].toUpperCase()==='PM'&&h!==12)h+=12;if(m[3].toUpperCase()==='AM'&&h===12)h=0;return b.replace(/-/g,'')+'T'+String(h).padStart(2,'0')+String(mn).padStart(2,'0')+'00';}return[iso(p[0],date),iso(p[1],date)];}
+function renderSpotlight(){const box=document.getElementById('spotlight');if(!af){box.classList.remove('visible');return;}const today=ds(new Date());let next=null;for(const m of MONTHS)for(const s of m.schedule)if(s.date>=today&&onShift(s,af)){if(!next||s.date<next.date){next=s;break;}}if(!next){box.classList.remove('visible');return;}const isLead=next.lead===af,isRunner=next.runner===af,isActive=next.active.includes(af),isToday=next.date===today;const role=isLead?'Lead':isRunner?'Runner':isActive?'On shift':'Backup';const rc=isLead?'lead':isRunner?'runner':isActive?'active':'backup';const d=new Date(next.date+'T12:00:00');const lbl=d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});const others=next.active.filter(n=>n!==af);box.className='spotlight visible';box.innerHTML='<div class="spotlight-eyebrow">'+(isToday?"Today's shift":"Coming up next")+'</div><div class="spotlight-title">'+lbl+'</div><div class="spotlight-time">'+next.time+'</div><span class="spotlight-role '+rc+'">'+role+'</span><div class="spotlight-team">Also on shift: '+(others.length?others.join(', '):'—')+'</div>';}
+function render(){const wrap=document.getElementById('shifts-wrap'),today=ds(new Date());const toShow=af?cur().filter(s=>onShift(s,af)):cur();if(!toShow.length){wrap.innerHTML='<div class="empty">☕<br>No shifts this month.</div>';return;}wrap.innerHTML='';toShow.forEach(s=>{const d=new Date(s.date+'T12:00:00');const isToday=s.date===today;const card=document.createElement('div');let cls='shift-card highlighted';if(af&&s.lead===af)cls+=' is-lead';else if(af&&s.runner===af)cls+=' is-runner';card.className=cls;let badges='';s.active.forEach(name=>{const lead=name===s.lead,self=name===af;let c='barista-badge';if(self&&lead)c+=' b-self b-lead';else if(self)c+=' b-self';else if(lead)c+=' b-lead';else c+=' b-active';badges+='<span class="'+c+'">'+name+(lead?' ☕':'')+'</span>';});const rHTML=s.runner?('<div class="runner-row"><strong>Runner:</strong><span class="runner-badge'+(s.runner===af?' b-self':'')+'">'+s.runner+'</span></div>'):'';const bHTML=s.backup&&s.backup.length?('<div class="backup-row"><strong>Backup:</strong> '+s.backup.join(', ')+'</div>'):'';const dayNum=d.getDate();const mo=d.toLocaleDateString('en-US',{month:'short'});card.innerHTML='<div class="card-header"><div class="card-date-group"><div class="card-day">'+s.day.slice(0,3)+'</div><div class="card-date">'+dayNum+'</div><div class="card-month">'+mo+(isToday?'<span class="today-badge">Today</span>':'')+'</div></div><div class="card-time">'+s.time+'</div></div><div class="card-body"><div class="barista-row">'+badges+'</div>'+rHTML+bHTML+'</div>';wrap.appendChild(card);});}
+function ds(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+buildPills();render();
 </script>
 </body>
 </html>
