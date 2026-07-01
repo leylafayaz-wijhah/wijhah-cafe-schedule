@@ -106,6 +106,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .shift-card.highlighted.ev-friday{border-color:var(--scarlet);box-shadow:0 2px 16px rgba(112,23,46,.15);}
 .shift-card.highlighted.ev-wednesday{border-color:var(--sepia);box-shadow:0 2px 16px rgba(163,129,117,.18);}
 .shift-card.highlighted.ev-thursday{border-color:var(--pink);box-shadow:0 2px 16px rgba(196,147,140,.2);}
+.day-pill-row{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px;}
+.day-pill{border:1.5px solid var(--border);background:var(--offwhite);border-radius:20px;padding:5px 13px;font-size:11px;font-weight:700;cursor:pointer;transition:all .15s;user-select:none;letter-spacing:.4px;text-transform:uppercase;}
+.day-pill.dp-friday{color:var(--scarlet);border-color:rgba(112,23,46,.3);}
+.day-pill.dp-friday.active{background:var(--scarlet);color:white;border-color:var(--scarlet);}
+.day-pill.dp-wednesday{color:var(--sepia);border-color:rgba(163,129,117,.4);}
+.day-pill.dp-wednesday.active{background:var(--sepia);color:white;border-color:var(--sepia);}
+.day-pill.dp-sunday{color:var(--blue);border-color:rgba(57,84,121,.3);}
+.day-pill.dp-sunday.active{background:var(--blue);color:white;border-color:var(--blue);}
+.day-pill.dp-thursday{color:var(--pink);border-color:rgba(196,147,140,.4);}
+.day-pill.dp-thursday.active{background:var(--pink);color:white;border-color:var(--pink);}
 </style>
 </head>
 <body>
@@ -119,6 +129,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div class="name-pills" id="name-pills">
     <div class="name-pill all-pill active" onclick="setFilter(null,this)">Everyone</div>
   </div>
+<div id="day-pills" class="day-pill-row"><span class="day-pill dp-friday" onclick="setDayFilter('Friday',this)">&#9654; Faith Circles</span><span class="day-pill dp-wednesday" onclick="setDayFilter('Wednesday',this)">&#9654; Inner Compass</span><span class="day-pill dp-sunday" onclick="setDayFilter('Sunday',this)">&#9654; Sunday Suhbah</span><span class="day-pill dp-thursday" onclick="setDayFilter('Thursday',this)">&#9654; Pearls of Wisdom</span></div>
 </div>
 <div class="spotlight" id="spotlight"></div>
 <div class="shifts-wrap" id="shifts-wrap"></div>
@@ -136,7 +147,7 @@ const MONTHS=[{"year":2026,"monthName":"June","schedule":[{"date":"2026-06-07","
 const BARISTAS=["Abdullah S.","Habiba Hashi","Maryam Ahmed","Maryam Ullah","Minelle Zuberi","Mubasshira","Taha Butta","Tooba Shaikh","Umar"];
 const GROCERY_ORDER=["Abdullah S.","Habiba Hashi","Maryam Ahmed","Maryam Ullah","Minelle Zuberi","Mubasshira","Taha Butta","Tooba Shaikh","Umar"];
 const GROCERY_START_DATE='2026-07-01';
-let mi=0,af=null,showGroceries=false;
+let mi=0,af=null,df=null,showGroceries=false;
 
 function ds(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
 function cur(){return MONTHS[mi].schedule;}
@@ -184,6 +195,7 @@ function setFilter(name,el){
   if(showGroceries){renderSpotlight();renderGroceries();}
   else{render();renderSpotlight();updateCalBar();window.scrollTo({top:0,behavior:'smooth'});}
 }
+function setDayFilter(day,el){if(df===day){df=null;document.querySelectorAll('.day-pill').forEach(p=>p.classList.remove('active'));}else{df=day;document.querySelectorAll('.day-pill').forEach(p=>p.classList.remove('active'));el.classList.add('active');}render();}
 function onShift(s,n){if(!n)return true;return s.active.includes(n)||s.runner===n;}
 function allMyShifts(){if(!af)return[];return cur().filter(s=>onShift(s,af));}
 function updateCalBar(){
@@ -238,7 +250,7 @@ function renderGroceries(){
 }
 function render(){
   const wrap=document.getElementById('shifts-wrap'),today=ds(new Date());
-  const toShow=af?cur().filter(s=>onShift(s,af)):cur();
+  let toShow=af?cur().filter(s=>onShift(s,af)):cur();if(df)toShow=toShow.filter(s=>s.day===df);
   if(!toShow.length){wrap.innerHTML='<div class="empty">\u2615<br>No shifts this month.</div>';return;}
   wrap.innerHTML='';
   toShow.forEach(s=>{
