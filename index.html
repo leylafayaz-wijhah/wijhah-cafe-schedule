@@ -168,14 +168,14 @@ function getMyGroceryDuty(name){
 }
 function fmtDate(d){const[y,m,dy]=d.split('-').map(Number);return new Date(y,m-1,dy).toLocaleDateString('en-US',{month:'short',day:'numeric'});}
 
-function setMonth(idx,el){
+function setMonth(idx,el){var dp=document.getElementById('day-pills');if(dp)dp.style.display='';
   showGroceries=false;mi=idx;
   document.querySelectorAll('.month-tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');
   document.getElementById('shifts-wrap').style.display='';
   document.getElementById('groceries-view').style.display='none';
   render();renderSpotlight();updateCalBar();
 }
-function setGroceries(el){
+function setGroceries(el){var dp=document.getElementById('day-pills');if(dp)dp.style.display='none';df=null;document.querySelectorAll('.day-pill').forEach(function(p){p.classList.remove('active');});
   showGroceries=true;
   document.querySelectorAll('.month-tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');
   document.getElementById('shifts-wrap').style.display='none';
