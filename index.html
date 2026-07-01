@@ -5,7 +5,7 @@
 <title>Wijhah Cafe Schedule</title>
 <style>
 
-:root{--scarlet:#70172E;--ink:#000232;--blue:#395479;--green:#2F4842;--sepia:#A38175;--offwhite:#F8F7F3;--border:#E8E4DE;}
+:root{--scarlet:#70172E;--ink:#000232;--blue:#395479;--green:#2F4842;--sepia:#A38175;--offwhite:#F8F7F3;--border:#E8E4DE;--pink:#C4938C;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--offwhite);color:var(--ink);min-height:100vh;padding-bottom:100px;}
 .header{background:var(--scarlet);color:white;padding:24px 24px 0;text-align:center;}
@@ -90,6 +90,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .cycle-now-badge{display:inline-block;background:white;color:#059669;font-size:10px;font-weight:700;text-transform:uppercase;padding:2px 7px;border-radius:4px;margin-left:6px;vertical-align:middle;}
 .spotlight-grocery{margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.15);font-size:13px;opacity:.85;}
 
+
+.event-strip{height:6px;width:100%;}
+.ev-sunday .event-strip{background:var(--blue);}
+.ev-wednesday .event-strip{background:var(--sepia);}
+.ev-friday .event-strip{background:var(--scarlet);}
+.ev-thursday .event-strip{background:var(--pink);}
+.event-label{font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;padding:3px 8px;border-radius:10px;white-space:nowrap;}
+.ev-sunday .event-label{background:var(--blue);color:white;}
+.ev-wednesday .event-label{background:var(--sepia);color:white;}
+.ev-friday .event-label{background:var(--scarlet);color:white;}
+.ev-thursday .event-label{background:var(--pink);color:white;}
+.shift-card.past .event-strip{opacity:.25;}
+.shift-card.past .event-label{opacity:.4;}
+.shift-card.highlighted.ev-friday{border-color:var(--scarlet);box-shadow:0 2px 16px rgba(112,23,46,.15);}
+.shift-card.highlighted.ev-wednesday{border-color:var(--sepia);box-shadow:0 2px 16px rgba(163,129,117,.18);}
+.shift-card.highlighted.ev-thursday{border-color:var(--pink);box-shadow:0 2px 16px rgba(196,147,140,.2);}
 </style>
 </head>
 <body>
