@@ -122,7 +122,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <div class="header">
   <div class="header-eyebrow">&#9749; Wijhah Caf&#233;</div>
   <h1>Schedule</h1>
-  <div class="month-tabs"><button class="month-tab grocery-tab" onclick="setGroceries(this)">&#x1F6D2; Groceries</button><button class="month-tab active" onclick="setMonth(0,this)">June 2026</button><button class="month-tab" onclick="setMonth(1,this)">July 2026</button><button class="month-tab" onclick="setMonth(2,this)">August 2026</button></div>
+  <div class="month-tabs"><button class="month-tab grocery-tab" onclick="setGroceries(this)">&#x1F6D2; Groceries</button><button class="month-tab" onclick="setMonth(0,this)">June 2026</button><button class="month-tab" onclick="setMonth(1,this)">July 2026</button><button class="month-tab" onclick="setMonth(2,this)">August 2026</button></div>
 </div>
 <div class="filter-section">
   <div class="filter-label">Tap your name</div>
@@ -148,6 +148,17 @@ const BARISTAS=["Abdullah S.","Habiba Hashi","Maryam Ahmed","Maryam Ullah","Mine
 const GROCERY_ORDER=["Abdullah S.","Habiba Hashi","Maryam Ahmed","Maryam Ullah","Minelle Zuberi","Mubasshira","Taha Butta","Tooba Shaikh","Umar"];
 const GROCERY_START_DATE='2026-07-01';
 let mi=0,af=null,df=null,showGroceries=false;
+(function(){
+  var today=new Date();
+  var y=today.getFullYear(), mName=today.toLocaleDateString('en-US',{month:'long'});
+  var idx=MONTHS.findIndex(function(m){return m.year===y && m.monthName===mName;});
+  if(idx===-1) idx=MONTHS.length-1;
+  mi=idx;
+})();
+function highlightInitialTab(){
+  var tabs=document.querySelectorAll('.month-tab:not(.grocery-tab)');
+  tabs.forEach(function(t,i){ t.classList.toggle('active', i===mi); });
+}
 
 function ds(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
 function cur(){return MONTHS[mi].schedule;}
@@ -281,7 +292,7 @@ function pt(date,time){
   function iso(t,b){const m=t.match(/(\d+):(\d+)\s*(AM|PM)/i);if(!m)return null;let h=parseInt(m[1]),mn=parseInt(m[2]);if(m[3].toUpperCase()==='PM'&&h!==12)h+=12;if(m[3].toUpperCase()==='AM'&&h===12)h=0;return b.replace(/-/g,'')+'T'+String(h).padStart(2,'0')+String(mn).padStart(2,'0')+'00';}
   return[iso(p[0],date),iso(p[1],date)];
 }
-buildPills();render();
+buildPills();highlightInitialTab();render();
 
 </script>
 </body>
