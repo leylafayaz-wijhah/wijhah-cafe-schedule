@@ -122,7 +122,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <div class="header">
   <div class="header-eyebrow">&#9749; Wijhah Caf&#233;</div>
   <h1>Schedule</h1>
-  <div class="month-tabs"><button class="month-tab grocery-tab" onclick="setGroceries(this)">&#x1F6D2; Groceries</button><button class="month-tab" onclick="setMonth(0,this)">June 2026</button><button class="month-tab" onclick="setMonth(1,this)">July 2026</button><button class="month-tab" onclick="setMonth(2,this)">August 2026</button></div>
+  <div class="month-tabs" id="month-tabs"><button class="month-tab grocery-tab" onclick="setGroceries(this)">&#x1F6D2; Groceries</button></div>
 </div>
 <div class="filter-section">
   <div class="filter-label">Tap your name</div>
@@ -193,6 +193,16 @@ function setGroceries(el){var dp=document.getElementById('day-pills');if(dp)dp.s
   document.getElementById('groceries-view').style.display='';
   renderGroceries();renderSpotlight();
   document.getElementById('cal-bar').classList.remove('visible');
+}
+function buildMonthTabs(){
+  const c=document.getElementById('month-tabs');
+  MONTHS.forEach(function(m,i){
+    const b=document.createElement('button');
+    b.className='month-tab';
+    b.textContent=m.monthName+' '+m.year;
+    b.onclick=function(){setMonth(i,b);};
+    c.appendChild(b);
+  });
 }
 function buildPills(){
   const c=document.getElementById('name-pills');
@@ -292,7 +302,7 @@ function pt(date,time){
   function iso(t,b){const m=t.match(/(\d+):(\d+)\s*(AM|PM)/i);if(!m)return null;let h=parseInt(m[1]),mn=parseInt(m[2]);if(m[3].toUpperCase()==='PM'&&h!==12)h+=12;if(m[3].toUpperCase()==='AM'&&h===12)h=0;return b.replace(/-/g,'')+'T'+String(h).padStart(2,'0')+String(mn).padStart(2,'0')+'00';}
   return[iso(p[0],date),iso(p[1],date)];
 }
-buildPills();highlightInitialTab();render();
+buildPills();buildMonthTabs();highlightInitialTab();render();
 
 </script>
 </body>
